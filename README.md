@@ -45,18 +45,30 @@ Add, track, and get reminded of bills/subscriptions so nothing slips through the
 
 ## 📂 Database
 
-**MySQL** — simple table structure:
+**MySQL** — simple table structures:
 
-| Column   | Type         |
-|----------|-------------|
-| id       | int (PK)     |
-| name     | varchar      |
-| due_date | date         |
-| amount   | decimal      |
-| status   | enum (paid/unpaid) |
-| user_id  | int (FK)     |
+### users
+| Column    | Type         | Description                  |
+|-----------|-------------|------------------------------|
+| id        | int (PK)     | Primary key                  |
+| name      | varchar      | User's full name             |
+| email     | varchar      | User's email (unique)        |
+| password  | varchar      | Hashed password (optional if using Google OAuth) |
+| created_at| timestamp    | Account creation timestamp   |
+| updated_at| timestamp    | Last update timestamp        |
 
----
+### bills
+| Column    | Type         | Description                  |
+|-----------|-------------|------------------------------|
+| id        | int (PK)     | Primary key                  |
+| user_id   | int (FK)     | References `users.id`        |
+| name      | varchar      | Bill/subscription name       |
+| due_date  | date         | Due date                     |
+| amount    | decimal      | Optional amount              |
+| status    | enum(paid/unpaid) | Payment status           |
+| created_at| timestamp    | Bill creation timestamp      |
+| updated_at| timestamp    | Last update timestamp        |
+
 
 ## 🚀 Deployment
 
